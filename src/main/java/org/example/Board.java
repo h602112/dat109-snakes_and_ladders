@@ -1,28 +1,21 @@
 package org.example;
 
 public class Board {
-    private Tile[] tiles;
 
-    public Board() {
-        tiles = new Tile[100];
+    private LadderTile[] ladderTiles;
+    private SnakeTile[] snakeTiles;
+
+    public Board(LadderTile[] ladderTiles, SnakeTile[] snakeTiles) {
+
+        this.ladderTiles = ladderTiles;
+        this.snakeTiles = snakeTiles;
     }
 
-    public Tile getTile(int index) {
-        return tiles[index];
+    public SnakeTile[] getSnakeTiles() {
+        return snakeTiles;
     }
 
-
-    public Tile findTile(Tile tile, int sum) {
-        return tiles[tile.getIndex() + sum];
-    }
-
-    public void addTile(Tile tile, int index) {
-        tiles[index] = tile;
-    }
-
-    public void createTiles() {
-        for (int i = 0; i < tiles.length; i++) {
-            addTile(new NormalTile(i), i);
-        }
+    public LadderTile[] getLadderTiles() {
+        return ladderTiles;
     }
 }

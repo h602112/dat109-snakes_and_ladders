@@ -24,5 +24,6 @@ public class Player {
     public void playTurn(Dice dice) {
         dice.roll();
         move(dice.getFaceValue());
+
     }
 }

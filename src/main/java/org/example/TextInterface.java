@@ -6,8 +6,15 @@ public class TextInterface {
 
     public void play() {
         Scanner scanner = new Scanner(System.in);
-        Board board = new Board();
-        board.createTiles();
+
+
+        LadderTile[] ladderTiles = TileFactory.createLadderTiles();
+
+        SnakeTile[] snakeTiles = TileFactory.createSnakeTiles();
+
+
+        Board board = new Board(ladderTiles, snakeTiles);
+
         Dice dice = new Dice();
         //asks for the number of players using the terminal
         System.out.println("how many players are playing?: ");
@@ -24,7 +31,7 @@ public class TextInterface {
         for (int i = 0; i < numberOfPlayers; i++) {
             System.out.println("Enter name of player " + (i + 1) + ": ");
             String name = scanner.next();
-            players[i] = new Player(name, new Piece(board.getTile(0), board));
+            players[i] = new Player(name, new Piece(0, board));
         }
         boolean gameIsRunning = true;
 
@@ -35,14 +42,13 @@ public class TextInterface {
         while (gameIsRunning) {
             for (Player player: players) {
                 player.playTurn(dice);
-                if (player.getPiece().getTile().getIndex() == 99) {
+
+                if (player.getPiece().getPosition() == 99) {
                     System.out.println(player.getName() + " won!");
                     gameIsRunning = false;
                     break;
                 }
-                System.out.print(player.getName() +
-                        " is on tile " + player.getPiece().getTile().getIndex() + " and ");
-                player.getPiece().getTile().landedOn();
+
             }
         }
     }

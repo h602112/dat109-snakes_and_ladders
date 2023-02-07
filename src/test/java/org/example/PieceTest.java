@@ -8,11 +8,14 @@ class PieceTest {
 
     @Test
     public void testMove() {
-        Board board = new Board();
-        board.createTiles();
-        Piece piece = new Piece(board.getTile(0), board);
-        piece.move(1);
-        assertEquals(1, piece.getTile().getIndex());
+        LadderTile[] ladderTiles = TileFactory.createLadderTiles();
+        SnakeTile[] snakeTiles = TileFactory.createSnakeTiles();
+        Board board = new Board(ladderTiles, snakeTiles);
+        Piece piece = new Piece(0, board);
+        assertEquals(0, piece.getPosition());
+        piece.move(2);
+        assertEquals(38, piece.getPosition());
+
     }
 
 }
